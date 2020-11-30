@@ -1,2 +1,2 @@
-# good-vibes-only
+# Good-Vibes-Only
 Have a good day😍
