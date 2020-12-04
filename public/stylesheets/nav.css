@@ -1,0 +1,23 @@
+#logo {
+  font-size: 20px;
+  font-family: "Lilita One";
+  color: black;
+}
+
+#logo:active {
+  color: black;
+}
+
+#logo:hover {
+  text-decoration: none;
+}
+
+.nav-link{
+  font-size: 16px;
+}
+
+@media (max-width: 768px){
+  #logo{
+    font-size: 18px;
+  }
+}
