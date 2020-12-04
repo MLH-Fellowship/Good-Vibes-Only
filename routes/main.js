@@ -4,13 +4,13 @@ var User = require('../models/user');
 const passport = require('passport');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index',{title: "My Express APp"});
+router.get("/", function (req, res, next) {
+  res.render("index", { title: "Good Vibes Only 💕" });
 });
 
 // Get register Page
 router.get('/register',function(req,res,next){
-  res.render('register')
+  res.render('register', { title: "Good Vibes Only 💕" })
 })
 
 //Post Request on Register Page
@@ -47,7 +47,7 @@ async function database(req,res){
 
 //Get Login Page
 router.get('/login',function(req,res,next){
-  res.render('login')
+  res.render('login', { title: "Good Vibes Only 💕" })
 })
 
 //Post Request on Login Page
@@ -59,7 +59,7 @@ router.post('/login',function(req,res,next){
       if(err){ return res.status(501).json(err);}
       return res.redirect('/users/dashboard')
     });
-  })(req,res,next);
+  })(req, res, next);
 });
 
 router.get('/logout',isValidUser,function(req,res,next){
