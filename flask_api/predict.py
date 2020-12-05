@@ -2,23 +2,7 @@ import pickle
 import pandas as pd
 import re
 from nltk.stem import WordNetLemmatizer
-
-
-def load_models():
-    '''
-    Replace '..path/' by the path of the saved models.
-    '''
-    
-    # Load the vectoriser.
-    file = open('vectoriser.pickle', 'rb')
-    vectoriser = pickle.load(file)
-    file.close()
-    # Load the LR Model.
-    file = open('Sentiment-Model.pickle', 'rb')
-    LRmodel = pickle.load(file)
-    file.close()
-    
-    return vectoriser, LRmodel
+from textblob import TextBlob
 
 # Defining dictionary containing all emojis with their meanings.
 emojis = {':)': 'smile', ':-)': 'smile', ';d': 'wink', ':-E': 'vampire', ':(': 'sad', 
@@ -76,43 +60,24 @@ def preprocess(textdata):
 
         tweetwords = ''
         for word in tweet.split():
-            # Checking if the word is a stopword.
-            #if word not in stopwordlist:
             if len(word)>1:
                 # Lemmatizing the word.
                 word = wordLemm.lemmatize(word)
                 tweetwords += (word+' ')
             
         processedText.append(tweetwords)
-        
-    return processedText      
+    clean_text = " "
+    return clean_text.join(processedText)      
 
 def sentiment_predict(text):
     # Predict the sentiment
-    vectoriser, LRmodel = load_models()
-    pre_text = preprocess(text)
-    textdata = vectoriser.transform(pre_text)
-    sentiment = LRmodel.predict(textdata)
-    if sentiment[0] == 0:
-        result = 'Negative'
-    else:
-        result = 'Positive'
-    
-    # Make a list of text with sentiment.
-    # data = []
-    # for text, pred in zip(text, sentiment):
-    #     data.append((text,pred))
+    analysis = TextBlob(preprocess(text))
         
-    # Convert the list into a Pandas DataFrame.
-    # df = pd.DataFrame(data, columns = ['text','sentiment'])
-    # df = df.replace([0,1], ["Negative","Positive"])
+    if analysis.sentiment.polarity > 0:
+        result =  1
+    elif analysis.sentiment.polarity == 0:
+        result =  0
+    else:
+        result = -1
     return result
 
-if __name__=="__main__":
-    # Loading the models.
-    
-    # Text to classify should be in a list.
-    text = ["Happy Birthday"]
-    
-    df = sentiment_predict(text)
-    print(df)
