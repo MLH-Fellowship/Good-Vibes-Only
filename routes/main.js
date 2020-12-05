@@ -68,6 +68,10 @@ router.get('/logout',isValidUser,function(req,res,next){
   //return res.status(200).json({message:'Logout Successful'});
 });
 
+router.get('/feed',(req,res,next) => {
+  res.render('feed',{ title: "Good Vibes Only 💕" })
+})
+
 function isValidUser(req,res,next){
   if(req.isAuthenticated()){
     next()
