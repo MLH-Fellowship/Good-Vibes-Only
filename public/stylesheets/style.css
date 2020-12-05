@@ -3,3 +3,9 @@ body {
   font-size: 14px;
   box-sizing: border-box;
 }
+
+#root {
+  box-sizing: border-box;
+  padding: 16px;
+  position: relative;
+}

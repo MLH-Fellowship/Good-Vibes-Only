@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <%- include('./components/header'); -%>
+  <link rel='stylesheet' href='/stylesheets/form.css' />
+  <link rel='stylesheet' href='/stylesheets/feed.css' />
+  <body>
+    <div id='root'>
+      <%- include('./components/nav'); -%>
+      <div class='position-absolute fixed-top d-flex flex-column min-vh-100 justify-content-center align-items-center' style="z-index: 0;">
+        <div id='posts' class="carousel slide w-100" data-touch="true" data-interval="false" data-ride="false" data-wrap="false">
+          <div class="carousel-inner py-5">
+            <!-- item -->
+            <div class="carousel-item active">
+              <div class="d-flex w-100 align-items-center justify-content-center" style="height: 64vh;">
+                <div id='form' class="d-flex flex-column justify-content-center align-items-center shadow p-2 mb5 bg-white rounded">
+                  <div class="img-container">
+                    <img src='https://source.unsplash.com/random' class="img mt-2"/>
+                  </div>
+                  <p class="align-center mt-4 mb-2">I didn't see you today, but I know you look cute 😍</p>
+                </div>
+              </div>
+            </div>
+            <!-- item -->
+            <div class="carousel-item">
+              <div class="d-flex w-100 align-items-center justify-content-center" style="height: 64vh;">
+                <div id='form' class="d-flex flex-column justify-content-center align-items-center shadow p-2 mb5 bg-white rounded">
+                  <div class="img-container">
+                    <img src='https://source.unsplash.com/random' class="img mt-2"/>
+                  </div>
+                  <p class="align-center mt-4 mb-2">I didn't see you today, but I know you look cute 😍</p>
+                </div>
+              </div>
+            </div>
+            <!-- item -->
+            <div class="carousel-item">
+              <div class="d-flex w-100 align-items-center justify-content-center" style="height: 64vh;">
+                <div id='form' class="d-flex flex-column justify-content-center align-items-center shadow p-2 mb5 bg-white rounded">
+                  <p class="align-center m-4">I didn't see you today, but I know you look cute 😍</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- inner carousel ends here-->
+        </div>
+        <!-- controls -->
+        <a id="feed-prev" href="#posts" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" style="color: black;"></span>
+        </a>
+        <div class="d-flex mb-4 btns">
+          <button class="btn btn-outline-success mr-3" href="#posts" role="link" data-slide="next">mark as seen👀</button>
+          <button class="btn btn-outline-danger">Contribute❤</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <%- include('./components/scripts'); -%>
+</html>
+
+
