@@ -1,0 +1,34 @@
+.img-container{
+    position: relative;
+    max-width: 100%;
+    
+    object-fit: contain;
+}
+
+.img{
+    position: relative;
+    height: 100%;
+    width: auto;
+    max-height: 60vh;
+    max-width: 100%;
+}
+
+.btns {
+    position: fixed;
+    bottom: 0;
+}
+
+#feed-prev{
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
+    border: 1px black solid;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+
+    padding: 16px;
+
+    background-color: black;
+}
