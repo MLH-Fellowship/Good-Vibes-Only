@@ -4,6 +4,9 @@ import re
 from nltk.stem import WordNetLemmatizer
 from textblob import TextBlob
 
+def clean_tweet(tweet):
+    return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
+
 # Defining dictionary containing all emojis with their meanings.
 emojis = {':)': 'smile', ':-)': 'smile', ';d': 'wink', ':-E': 'vampire', ':(': 'sad', 
           ':-(': 'sad', ':-<': 'sad', ':P': 'raspberry', ':O': 'surprised',
@@ -71,7 +74,7 @@ def preprocess(textdata):
 
 def sentiment_predict(text):
     # Predict the sentiment
-    analysis = TextBlob(preprocess(text))
+    analysis = TextBlob(clean_tweet(text))
         
     if analysis.sentiment.polarity > 0:
         result =  1
@@ -81,3 +84,6 @@ def sentiment_predict(text):
         result = -1
     return result
 
+if __name__ == '__main__' :
+    text = "I hate you"
+    print(sentiment_predict(text))
