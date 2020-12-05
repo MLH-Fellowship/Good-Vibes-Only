@@ -5,16 +5,17 @@ const passport = require('passport');
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "Good Vibes Only 💕" });
+  res.render("index");
 });
 
 // Get register Page
 router.get('/register',function(req,res,next){
-  res.render('register', { title: "Good Vibes Only 💕" })
+  res.render('register')
 })
 
 //Post Request on Register Page
 router.post('/register',function(req,res,next){
+  console.log(req.body)
   if (req.body.password!==req.body.cpassword){
     return res.render('register',{"error":"Passwords dont match"})
   }
@@ -47,7 +48,7 @@ async function database(req,res){
 
 //Get Login Page
 router.get('/login',function(req,res,next){
-  res.render('login', { title: "Good Vibes Only 💕" })
+  res.render('login')
 })
 
 //Post Request on Login Page
@@ -57,7 +58,7 @@ router.post('/login',function(req,res,next){
     if (!user){  return res.render('login',{"error":"Invalid email/password"})}
     req.login(user,function(err){
       if(err){ return res.status(501).json(err);}
-      return res.redirect('/users/dashboard')
+      return res.redirect('/users/feed')
     });
   })(req, res, next);
 });

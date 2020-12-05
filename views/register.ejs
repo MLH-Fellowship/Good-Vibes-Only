@@ -4,32 +4,32 @@
   <link rel='stylesheet' href='/stylesheets/form.css' />
   <body>
     <div class="min-vh-100 d-flex justify-content-center align-items-center">
-      <form id='form' class="d-flex flex-column shadow p-3 mb-5 bg-white rounded">
+      <form action="/register" method="POST" id='form' class="d-flex flex-column shadow p-3 mb-5 bg-white rounded">
         <p class="text-center font-weight-bold" style="font-size: 18px;">Let's get the party started 🥳</p>
         <!-- name -->
         <div class="form-group">
-          <label for="name">😇 your name: </label>
-          <input type="text" class="form-control form-control-sm" id="name">
+          <label for="name">😇 Your name: </label>
+          <input type="text" class="form-control form-control-sm" name="name">
         </div>
         <!-- email -->
         <div class="form-group">
-          <label for="email">😇 your email: </label>
-          <input type="email" class="form-control form-control-sm" id="email" aria-describedby="emailHelp">
+          <label for="email">😇 Your email: </label>
+          <input type="email" class="form-control form-control-sm" name="email" aria-describedby="emailHelp">
         </div>
         <!-- password -->
         <div class="form-group">
-          <label for="password">😇 enter a password: </label>
-          <input type="password" class="form-control form-control-sm" id="password">
+          <label for="password">😇 Enter a password: </label>
+          <input type="password" class="form-control form-control-sm" name="password">
         </div>
         <!-- confirm password -->
         <div class="form-group">
-          <label for="cpassword">😇 comfirm password: </label>
-          <input type="password" class="form-control form-control-sm" id="cpassword">
+          <label for="cpassword">😇 Comfirm password: </label>
+          <input type="password" class="form-control form-control-sm" name="cpassword">
         </div>
         <!-- bio -->
         <div class="form-group">
-          <label for="bio">😇 tell us about yourself:</label>
-          <textarea class="form-control form-control-sm" id="bio" rows="2"></textarea>
+          <label for="bio">😇 Tell us about yourself:</label>
+          <textarea class="form-control form-control-sm" name="bio" rows="2"></textarea>
         </div>
         <button type="submit" class="btn btn-outline-success w-25 align-self-center">🎉 Register!</button>
       </form>
