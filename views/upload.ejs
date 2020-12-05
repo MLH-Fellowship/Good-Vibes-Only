@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <%- include('./components/header'); -%>
+  <link rel='stylesheet' href='/stylesheets/upload.css' />
+  <body>
+    <div id='root'>
+      <%- include('./components/nav'); -%>
+      <div class='position-absolute fixed-top d-flex flex-column min-vh-100 justify-content-center align-items-center' style="z-index: 0;">
+        <form id='form' class="d-flex flex-column shadow p-4 mb-5 bg-white rounded">
+          <p class="text-center font-weight-bold" style="font-size: 16px;">Let's share some good vibes 💕</p>
+          <!-- email -->
+          <div class="form-group">
+            <label for="text">💕 your text: </label>
+            <textarea class="form-control form-control-sm" id="text" rows="2"></textarea>
+          </div>
+          <!-- image -->
+          <div class="custom-file">
+            <label class="custom-file-label" for="image">💕 choose an image</label>
+            <input type="file" class="custom-file-input" id="image">
+          </div>
+          <button type="submit" class="btn btn-outline-success w-25 align-self-center mt-4">🎉 upload!</button>
+        </form>
+      </div>
+    </div>
+  </body>
+  <%- include('./components/scripts'); -%>
+</html>
+  
