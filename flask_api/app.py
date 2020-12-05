@@ -1,21 +1,25 @@
-from predict import load_models, preprocess, sentiment_predict
-from flask import Flask, jsonify, request
-from flask_restful import reqparse, Api, Resource, abort
+from predict import sentiment_predict
+from flask import Flask, jsonify, request, abort, render_template
+from flask_cors import CORS
 
 app = Flask(__name__)
-api = Api(app)
+CORS(app)
 
+@app.route('/')
+def home():
+    return render_template('index.html')
 
-class PredictSentiment(Resource):
-	def get(self):
-		return('Hello, World!')
-	def put(self):
-		text = request.form['data']
-		ret  = sentiment_predict(text)
-		return(jsonify(ret))
-
-api.add_resource(PredictSentiment, '/')
-
+@app.route('/predict', methods=['GET', 'POST'])
+def predict():
+    # GET request
+    if request.method == 'GET':
+        return jsonify({"hello":"World"}) 
+    # POST request
+    if request.method == 'POST':
+        data = request.get_json()  # parse as JSON
+        user_content = data["data"]
+        result = sentiment_predict(user_content)
+        return jsonify(result),200
 
 if __name__ == '__main__' :
-    app.run(port=5000, debug=True)
+    app.run(debug=True, port=5000)
