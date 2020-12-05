@@ -8,16 +8,33 @@
       <div class='position-absolute fixed-top d-flex flex-column min-vh-100 justify-content-center align-items-center' style="z-index: 0;">
         <form id='form' class="d-flex flex-column shadow p-4 mb-5 bg-white rounded">
           <p class="text-center font-weight-bold" style="font-size: 16px;">Let's share some good vibes 💕</p>
-          <!-- email -->
+          <!-- text -->
           <div class="form-group">
             <label for="text">💕 your text: </label>
             <textarea class="form-control form-control-sm" id="text" rows="2"></textarea>
           </div>
           <!-- image -->
-          <div class="custom-file">
-            <label class="custom-file-label" for="image">💕 choose an image</label>
-            <input type="file" class="custom-file-input" id="image">
+          <div class="form-group">
+            <div class="custom-file">
+              <label class="custom-file-label" for="image">💕 choose an image</label>
+              <input type="file" class="custom-file-input" id="image">
+            </div>
           </div>
+          <div class="form-group">
+            <label for="category">💕 pick a category: </label>
+            <select class="custom-select" id="category">
+              <option selected>Open this select menu</option>
+              <option value="Animals">Animals</option>
+              <option value="Babies">Babies</option>
+              <option value="Memes">Memes</option>
+              <option value="Motivation">Motivation</option>
+              <option value="Quotes">Quotes</option>
+              <option value="Random">Random</option>
+              <option value="Story">Story</option>
+              <option value="Thought">Thought</option>
+            </select>
+          </div>
+          
           <button type="submit" class="btn btn-outline-success w-25 align-self-center mt-4">🎉 upload!</button>
         </form>
       </div>
