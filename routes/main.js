@@ -76,6 +76,14 @@ router.get('/feed',(req,res,next) => {
   res.render('feed',{ title: "Good Vibes Only 💕" })
 })
 
+router.get('/settings',(req,res,next) => {
+  res.render('settings',{ title: "Good Vibes Only 💕" })
+})
+
+router.get('/updatepassword',(req,res,next) => {
+  res.render('updatePassword',{ title: "Good Vibes Only 💕" })
+})
+
 function isValidUser(req,res,next){
   if(req.isAuthenticated()){
     next()
