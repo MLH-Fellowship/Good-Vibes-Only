@@ -68,6 +68,10 @@ router.get('/logout',isValidUser,function(req,res,next){
   //return res.status(200).json({message:'Logout Successful'});
 });
 
+router.get('/upload', (req,res,next) => {
+  res.render('upload',{ title: "Good Vibes Only 💕" })
+})
+
 router.get('/feed',(req,res,next) => {
   res.render('feed',{ title: "Good Vibes Only 💕" })
 })
