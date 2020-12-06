@@ -23,6 +23,10 @@ const upload= multer({
   storage: storage
 }).single('Post')
 
+router.get('/upload',isValidUser,(req,res)=>{
+  res.render("upload")
+})
+
 router.post('/upload',(req,res)=>{
   upload(req,res, (err)=>{
     if (err){
@@ -36,23 +40,42 @@ router.post('/upload',(req,res)=>{
 
 // Save Details to database 
 async function database(req,res){
-  var user= new User({
-    name:req.body.name,
-    email:req.body.email,
-    password: User.hashPassword(req.body.password),
-    createdAt: Date.now(),
-    bio: req.body.bio
-  });
-  try{
-    doc=await user.save()
-    return res.redirect('/login')
-    //return res.status(201).json(doc);
+  User.findOne({_id:req.user._id}).then( async result=>{
+
+    var post= new Post({
+      text: req.body.text,
+      url: req.file.destination+req.file.filename,
+      type: req.body.type,
+      name: result.name, 
+      userid:result._id,
+      verified:True
+    });
+    try{
+      doc=await post.save()
+      return res.redirect('/users/feed')
+      //return res.status(201).json(doc);
+    }
+    catch(err){
+      return res.render('upload')
+      //return res.status(501).json(err);
+    } 
+  }) 
+}
+
+router.get('/feed',(req,res)=>{
+  const posts = Post.aggregate([[ { $sample: { size: 10 } } ]])
+  res.render("feed",{posts:posts})
+})
+
+function isValidUser(req,res,next){
+  if(req.isAuthenticated()){
+    next()
   }
-  catch(err){
-    return res.render('register',{"error":"Error saving data! Please try again"})
-    //return res.status(501).json(err);
+  else{
+    console.log('Unauthorized request')
+    res.redirect('/login')
+  //return res.status(401).json({message:'Unauthorized Request'});
   }
-  
 }
 
 

@@ -69,6 +69,7 @@ router.get('/logout',isValidUser,function(req,res,next){
   //return res.status(200).json({message:'Logout Successful'});
 });
 
+
 function isValidUser(req,res,next){
   if(req.isAuthenticated()){
     next()
