@@ -1,20 +1,28 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var Post = require('../models/post');
 const passport = require('passport');
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "Good Vibes Only 💕" });
+  res.render("index");
 });
 
 // Get register Page
 router.get('/register',function(req,res,next){
-  res.render('register', { title: "Good Vibes Only 💕" })
+  if(req.user){
+    res.render('register',{userispresent:'present'})
+  }
+  else{
+    res.render('register')
+  }
+  
 })
 
 //Post Request on Register Page
 router.post('/register',function(req,res,next){
+  console.log(req.body)
   if (req.body.password!==req.body.cpassword){
     return res.render('register',{"error":"Passwords dont match"})
   }
@@ -47,7 +55,12 @@ async function database(req,res){
 
 //Get Login Page
 router.get('/login',function(req,res,next){
-  res.render('login', { title: "Good Vibes Only 💕" })
+  if(req.user){
+    res.render('login',{userispresent:'present'})
+  }
+  else{
+  res.render('login')
+}
 })
 
 //Post Request on Login Page
@@ -57,10 +70,24 @@ router.post('/login',function(req,res,next){
     if (!user){  return res.render('login',{"error":"Invalid email/password"})}
     req.login(user,function(err){
       if(err){ return res.status(501).json(err);}
-      return res.redirect('/users/dashboard')
+      return res.redirect('/users/feed')
     });
   })(req, res, next);
 });
+
+router.get('/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'] }))
+
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/err' }), (req, res) => {
+  req.login(req.session.passport.user,function(err){
+    if(err){ return res.status(501).json(err);}
+   
+        return res.redirect('/users/feed');
+      
+   
+    //return res.status(200).json({message:'Login Successful'});
+
+  });
+})
 
 router.get('/logout',isValidUser,function(req,res,next){
   req.logout();
@@ -68,12 +95,52 @@ router.get('/logout',isValidUser,function(req,res,next){
   //return res.status(200).json({message:'Logout Successful'});
 });
 
-router.get('/upload', (req,res,next) => {
-  res.render('upload',{ title: "Good Vibes Only 💕" })
+
+router.get('/settings',isValidUser, async(req,res,next) => {
+  user = await User.findOne({_id:req.user._id})
+  res.render('settings',{user,userispresent:'present'})
 })
 
-router.get('/feed',(req,res,next) => {
-  res.render('feed',{ title: "Good Vibes Only 💕" })
+router.post('/settings',async(req,res,next) => {
+  try{
+    user = await User.findByIdAndUpdate({_id:req.user._id},{
+      name:req.body.name,
+      bio:req.body.bio
+    })
+    user1 = await Post.updateMany({userid:req.user._id},{
+      name:req.body.name,
+    })
+    res.render('updateSuccessful')
+  }
+  catch(err){
+    res.render('updateFailed',{err})
+  }
+})
+
+router.get('/updatepassword',isValidUser,(req,res,next) => {
+  res.render('updatePassword',{ userispresent:'present'})
+})
+
+router.post('/updatepassword',isValidUser,async (req,res,next) => {
+  User.findOne({_id:req.user._id},async function (err,user){
+    if(err){ return res.render('updateFailed',{err}) }
+    if(!user.isValid(req.body.password)){
+        return res.render('updateFailed',{err:'Incorrect password'})
+    }
+    if (req.body.npassword != req.body.npassword2){
+      return res.render('updateFailed',{err:'Passwords donot match'})
+  }
+  try{
+    user = await User.findByIdAndUpdate({_id:req.user._id},{
+      password: User.hashPassword(req.body.npassword),
+    })
+    res.render('updateSuccessful')
+  }
+  catch(err){
+    res.render('updateFailed',{err})
+  }
+    
+})
 })
 
 router.get('/settings',(req,res,next) => {

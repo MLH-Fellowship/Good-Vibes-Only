@@ -8,9 +8,11 @@
       <div class='position-absolute fixed-top d-flex flex-column min-vh-100 justify-content-center align-items-center' style="z-index: 0;">
         <form id='form' class="d-flex flex-column shadow p-3 mb-5 bg-white rounded">
           <p class="text-center font-weight-bold" style="font-size: 18px;">😅 Couldn't update settings</p>
-          <p class="text-center mt-2 mb-3">error message here</p>
+
+          <p class="text-center mt-2 mb-3"><%- err %></p>
           <div class="d-flex justify-content-center align-items-center">
-              <a href="/feed" role="button" class="btn btn-outline-primary mr-3">👈 back to feed</a>
+              <a href="/users/feed" role="button" class="btn btn-outline-primary mr-3">👈 back to feed</a>
+
           </div>
         </form>
       </div>

@@ -1,20 +1,22 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white" style="width: 95%; margin: auto; z-index: 5;">
+<nav class="navbar navbar-expand-lg navbar-light">
 	<a id='logo' href="/">
-		<%= title %>
+		Good Vibes Only 💕
 	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
 		<div class="navbar-nav">
-		<!-- show this if not logged in -->
+		<% if(!locals.userispresent){ %>
 		<a class="nav-link" href="/">home</a>
 		<a class="nav-link" href="/register">register</a>
 		<a class="nav-link" href="/login">login</a>
+		<% } else { %>
 		<!-- show this if logged in -->
 		<a class="nav-link" href="/feed">home</a>
 		<a class="nav-link" href="/settings">settings</a>
 		<a class="nav-link" href="/logout">logout</a>
+		<% } %>
 		</div>
 	</div>
 </nav>
