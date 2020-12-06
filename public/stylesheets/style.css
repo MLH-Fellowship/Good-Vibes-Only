@@ -2,10 +2,18 @@ body {
   font-family: Montserrat, Helvetica, Arial, sans-serif;
   font-size: 14px;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 #root {
+  min-height: 100vh;
+  overflow: hidden;
   box-sizing: border-box;
   padding: 16px;
   position: relative;
+}
+
+canvas{
+  min-width: 100vw;
+  min-height: 100vh;
 }
