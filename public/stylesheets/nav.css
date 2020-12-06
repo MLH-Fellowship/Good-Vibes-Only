@@ -1,6 +1,6 @@
 #logo {
-  font-size: 20px;
-  font-family: "Lilita One";
+  font-size: 24px;
+  font-family: "Dancing Script";
   color: black;
 }
 
@@ -18,6 +18,6 @@
 
 @media (max-width: 768px){
   #logo{
-    font-size: 18px;
+    font-size: 20px;
   }
 }

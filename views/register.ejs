@@ -3,6 +3,8 @@
   <%- include('./components/header'); -%>
   <link rel='stylesheet' href='/stylesheets/form.css' />
   <body>
+    <div id="root">
+      <%- include('./components/nav'); -%>
     <div class="min-vh-100 d-flex justify-content-center align-items-center">
       <form action="/register" method="POST" id='form' class="d-flex flex-column shadow p-3 mb-5 bg-white rounded">
         <p class="text-center font-weight-bold" style="font-size: 18px;">Let's get the party started 🥳</p>
@@ -33,6 +35,7 @@
         </div>
         <button type="submit" class="btn btn-outline-success w-25 align-self-center">🎉 Register!</button>
       </form>
+    </div>
     </div>
   </body>
   <%- include('./components/scripts'); -%>

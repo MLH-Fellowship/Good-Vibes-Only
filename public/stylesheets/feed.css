@@ -32,3 +32,9 @@
 
     background-color: black;
 }
+
+@media (max-width: 600px){
+    #feed-prev{
+        visibility: hidden;
+    }
+}

@@ -4,7 +4,8 @@ var Post = require('../models/post');
 const User = require('../models/user');
 const passport = require('passport');
 const multer = require ("multer")
-const path = require("path")
+const path = require("path");
+const { SlowBuffer } = require('buffer');
 
 
 /* GET users listing. */
@@ -24,29 +25,33 @@ const upload= multer({
 }).single('myImage')
 
 router.get('/upload',isValidUser,(req,res)=>{
-  res.render("upload")
+  res.render("upload",{userispresent:'present'})
 })
 
 router.post('/upload',(req,res)=>{
-  console.log(req)
-  upload(req,res, (err)=>{
-    if (err){
-      console.log(err)
-      res.redirect('/users/upload')
-    }
-    else{
-      database(req,res)
-    }
-  })
+ 
+    console.log('Here')
+    upload(req,res, (err)=>{
+      if (err){
+        console.log(err)
+        console.log('Here')
+        res.redirect('/users/upload')
+      }
+      else{
+        console.log('Here')
+        database(req,res)
+      }
+    })
+  
 })
 
 // Save Details to database 
 async function database(req,res){
   User.findOne({_id:req.user._id}).then( async result=>{
-
-    var post= new Post({
+    const url = req.file.filename ? '/uploads/'+req.file.filename : ''
+    const post= new Post({
       text: req.body.text,
-      url: './public/uploads/'+req.file.filename,
+      url: url ,
       type: req.body.type,
       name: result.name, 
       userid:result._id,
@@ -58,15 +63,24 @@ async function database(req,res){
       //return res.status(201).json(doc);
     }
     catch(err){
+      console.log(err)
       return res.render('upload')
       //return res.status(501).json(err);
     } 
   }) 
 }
 
-router.get('/feed',(req,res)=>{
-  const posts = Post.aggregate([[ { $sample: { size: 10 } } ]])
+router.get('/feed',async (req,res)=>{
+  const posts = await Post.aggregate([
+    { $match: { verified: true } },
+    { $sample: { size: 10 } }
+])
+  if (req.user){
+    res.render("feed",{userispresent:'present',posts:posts})
+  }
+  else{
   res.render("feed",{posts:posts})
+}
 })
 
 function isValidUser(req,res,next){

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var Post = require('../models/post');
 const passport = require('passport');
 
 /* GET home page. */
@@ -10,7 +11,13 @@ router.get("/", function (req, res, next) {
 
 // Get register Page
 router.get('/register',function(req,res,next){
-  res.render('register')
+  if(req.user){
+    res.render('register',{userispresent:'present'})
+  }
+  else{
+    res.render('register')
+  }
+  
 })
 
 //Post Request on Register Page
@@ -48,7 +55,12 @@ async function database(req,res){
 
 //Get Login Page
 router.get('/login',function(req,res,next){
+  if(req.user){
+    res.render('login',{userispresent:'present'})
+  }
+  else{
   res.render('login')
+}
 })
 
 //Post Request on Login Page
@@ -83,6 +95,53 @@ router.get('/logout',isValidUser,function(req,res,next){
   //return res.status(200).json({message:'Logout Successful'});
 });
 
+
+router.get('/settings',isValidUser, async(req,res,next) => {
+  user = await User.findOne({_id:req.user._id})
+  res.render('settings',{user,userispresent:'present'})
+})
+
+router.post('/settings',async(req,res,next) => {
+  try{
+    user = await User.findByIdAndUpdate({_id:req.user._id},{
+      name:req.body.name,
+      bio:req.body.bio
+    })
+    user1 = await Post.updateMany({userid:req.user._id},{
+      name:req.body.name,
+    })
+    res.render('updateSuccessful')
+  }
+  catch(err){
+    res.render('updateFailed',{err})
+  }
+})
+
+router.get('/updatepassword',isValidUser,(req,res,next) => {
+  res.render('updatePassword',{ userispresent:'present'})
+})
+
+router.post('/updatepassword',isValidUser,async (req,res,next) => {
+  User.findOne({_id:req.user._id},async function (err,user){
+    if(err){ return res.render('updateFailed',{err}) }
+    if(!user.isValid(req.body.password)){
+        return res.render('updateFailed',{err:'Incorrect password'})
+    }
+    if (req.body.npassword != req.body.npassword2){
+      return res.render('updateFailed',{err:'Passwords donot match'})
+  }
+  try{
+    user = await User.findByIdAndUpdate({_id:req.user._id},{
+      password: User.hashPassword(req.body.npassword),
+    })
+    res.render('updateSuccessful')
+  }
+  catch(err){
+    res.render('updateFailed',{err})
+  }
+    
+})
+})
 
 function isValidUser(req,res,next){
   if(req.isAuthenticated()){
