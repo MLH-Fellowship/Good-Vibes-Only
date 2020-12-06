@@ -82,7 +82,6 @@ npm install
 
 ```
 MONGODB_URI=<your_mongodb URI>
-
 ```
 
 4. Start the project
