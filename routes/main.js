@@ -143,6 +143,14 @@ router.post('/updatepassword',isValidUser,async (req,res,next) => {
 })
 })
 
+router.get('/settings',(req,res,next) => {
+  res.render('settings',{ title: "Good Vibes Only 💕" })
+})
+
+router.get('/updatepassword',(req,res,next) => {
+  res.render('updatePassword',{ title: "Good Vibes Only 💕" })
+})
+
 function isValidUser(req,res,next){
   if(req.isAuthenticated()){
     next()
