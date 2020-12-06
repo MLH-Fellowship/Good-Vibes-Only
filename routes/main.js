@@ -6,6 +6,9 @@ const passport = require('passport');
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
+  if(req.user){
+    return res.redirect('/users/feed')
+  }
   res.render("index");
 });
 
