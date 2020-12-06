@@ -1,0 +1,39 @@
+#root{
+    animation: fadein ease 3s;
+    animation-iteration-count: 1; 
+    animation-fill-mode: forwards; 
+}
+
+.banner{
+    font-family: "Dancing Script";
+    font-size: 108px;
+    text-align: center;
+}
+
+.btn{
+    margin: 6px;
+}
+
+@media (max-width: 900px) {
+    .banner{
+        font-size: 84px;
+    }
+}
+
+@media (max-width: 600px) {
+    .banner{
+        font-size: 64px;
+    }
+    .index-flex{
+        flex-direction: column;
+    }
+}
+
+@keyframes fadein { 
+    0% { 
+        opacity: 0; 
+    } 
+    100% { 
+        opacity: 1; 
+    } 
+} 
