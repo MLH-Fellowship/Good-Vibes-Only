@@ -15,21 +15,23 @@ router.get('/', function(req, res, next) {
 const storage = multer.diskStorage({
   destination:'./public/uploads/',
   filename: (req,file,cb)=>{
-    cb(null,file.filename+Date.now()+path.extname(file.originalname))
+    cb(null,file.fieldname+Date.now()+path.extname(file.originalname))
   }
 });
 
 const upload= multer({
   storage: storage
-}).single('Post')
+}).single('myImage')
 
 router.get('/upload',isValidUser,(req,res)=>{
   res.render("upload")
 })
 
 router.post('/upload',(req,res)=>{
+  console.log(req)
   upload(req,res, (err)=>{
     if (err){
+      console.log(err)
       res.redirect('/users/upload')
     }
     else{
@@ -44,11 +46,11 @@ async function database(req,res){
 
     var post= new Post({
       text: req.body.text,
-      url: req.file.destination+req.file.filename,
+      url: './public/uploads/'+req.file.filename,
       type: req.body.type,
       name: result.name, 
       userid:result._id,
-      verified:True
+      verified:true
     });
     try{
       doc=await post.save()

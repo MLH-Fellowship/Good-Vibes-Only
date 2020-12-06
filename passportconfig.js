@@ -20,46 +20,47 @@ passport.use('local',new LocalStratergy({
     }
 ))
 
-// var GoogleStrategy = require('passport-google-oauth2').Strategy;
+var GoogleStrategy = require('passport-google-oauth2').Strategy;
 
-// // Use the GoogleStrategy within Passport.
-// //   Strategies in passport require a `verify` function, which accept
-// //   credentials (in this case, a token, tokenSecret, and Google profile), and
-// //   invoke a callback with a user object.
-// passport.use('google',new GoogleStrategy({
-//     clientID: process.env.GOOGLE_CLIENT_ID,
-//     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-//     callbackURL: process.env.CALLBACK_URL
-//   },
-//   function(token, tokenSecret, profile, done) {
-//     //check user table for anyone with a google ID of profile.id
-//     User.findOne({
-//         'email': profile.email
-//     }, function(err, user) {
-//         if (err) {
-//             return done(err);
-//         }
-//         //No user was found... so create a new user with values from Google (all the profile. stuff)
-//         if (!user) {
-//             user = new User({
+// Use the GoogleStrategy within Passport.
+//   Strategies in passport require a `verify` function, which accept
+//   credentials (in this case, a token, tokenSecret, and Google profile), and
+//   invoke a callback with a user object.
+passport.use('google',new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.CALLBACK_URL
+  },
+  function(token, tokenSecret, profile, done) {
+    //check user table for anyone with a google ID of profile.id
+    User.findOne({
+        'email': profile.email
+    }, function(err, user) {
+        if (err) {
+            return done(err);
+        }
+        //No user was found... so create a new user with values from Google (all the profile. stuff)
+        if (!user) {
+            user = new User({
                
-//                 name: profile.name.givenName,
-//                 email: profile.email,
-//                 password:User.hashPassword('pass@123'),
-//                 createdAt: Date.now()
+                name: profile.name.givenName,
+                email: profile.email,
+                password:User.hashPassword('pass@123'),
+                createdAt: Date.now(),
+                bio:'Hey there! I like to spread good vibes'
                
-//             });
-//             user.save(function(err) {
-//                 if (err) console.log(err);
-//                 return done(err, user);
-//             });
-//         } else {
-//             //found user. Return
-//             return done(err, user);
-//         }
-//     });
-// }
-// ));
+            });
+            user.save(function(err) {
+                if (err) console.log(err);
+                return done(err, user);
+            });
+        } else {
+            //found user. Return
+            return done(err, user);
+        }
+    });
+}
+));
 
 passport.serializeUser(function(user, done) {
     done(null, user._id);

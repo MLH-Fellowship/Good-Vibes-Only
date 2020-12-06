@@ -63,6 +63,20 @@ router.post('/login',function(req,res,next){
   })(req, res, next);
 });
 
+router.get('/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'] }))
+
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/err' }), (req, res) => {
+  req.login(req.session.passport.user,function(err){
+    if(err){ return res.status(501).json(err);}
+   
+        return res.redirect('/users/feed');
+      
+   
+    //return res.status(200).json({message:'Login Successful'});
+
+  });
+})
+
 router.get('/logout',isValidUser,function(req,res,next){
   req.logout();
   res.redirect('/')

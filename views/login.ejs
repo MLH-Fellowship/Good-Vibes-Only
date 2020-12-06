@@ -3,21 +3,32 @@
   <%- include('./components/header'); -%>
   <link rel='stylesheet' href='/stylesheets/form.css' />
   <body>
-    <div class="min-vh-100 d-flex justify-content-center align-items-center">
-      <form id='form' class="d-flex flex-column shadow p-4 mb-5 bg-white rounded">
-        <p class="text-center font-weight-bold" style="font-size: 16px;">Let's bring you some good vibes 💕</p>
-        <!-- email -->
-        <div class="form-group">
-          <label for="email">😇 Your email: </label>
-          <input type="email" class="form-control form-control-sm" id="email" aria-describedby="emailHelp">
-        </div>
-        <!-- password -->
-        <div class="form-group">
-          <label for="password">😇 Enter your password: </label>
-          <input type="password" class="form-control form-control-sm" id="password">
-        </div>
-        <button type="submit" class="btn btn-outline-success w-25 align-self-center">🎉 login!</button>
-      </form>
+    <div id="root">
+      <%- include('./components/nav'); -%>
+      <div class='position-absolute fixed-top d-flex flex-column min-vh-100 justify-content-center align-items-center' style="z-index: 0;">
+        <form id='form' class="d-flex flex-column shadow p-4 mb-5 bg-white rounded">
+          <p class="text-center font-weight-bold" style="font-size: 16px;">Let's bring you some good vibes 💕</p>
+          <!-- email -->
+          <div class="form-group">
+            <label for="email">😇 your email: </label>
+            <input type="email" class="form-control form-control-sm" name="email" aria-describedby="emailHelp">
+          </div>
+          <!-- password -->
+          <div class="form-group">
+            <label for="password">😇 enter your password: </label>
+            <input type="password" class="form-control form-control-sm" name="password">
+          </div>
+          <div class="d-flex flex-column align-self-center w-100 justify-content-center align-items-center">
+            <button type="submit" class="btn btn-outline-success mb-3">🎉 Login!</button>
+            <p>or</p>
+            <a href="/google" type="submit" class="btn btn-outline-primary">
+              <img src="https://img.icons8.com/bubbles/50/000000/google-logo.png" width="32px" height="32px"/> 
+              sign in with google
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
   </body>
   <%- include('./components/scripts'); -%>
 </html>
