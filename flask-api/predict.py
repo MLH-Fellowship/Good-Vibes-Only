@@ -79,7 +79,7 @@ def sentiment_predict(text):
     if analysis.sentiment.polarity > 0:
         result =  1
     elif analysis.sentiment.polarity == 0:
-        result =  0
+        result =  1
     else:
         result = -1
     return result
