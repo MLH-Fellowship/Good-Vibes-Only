@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Flask API</title>
+</head>
+<body>
+	<div>
+		<form enctype="multipart/form-data" action="/" method="POST">
+	        <input type="file" name="image">
+	        <button type="submit"> Submit</button>
+	    </form>
+	    {% if results %}
+	    		<div>
+	    			<img src="{{results.image}}" width = "300" height="200">
+	    		</div>
+	    		<div>
+	    			<p>Caption Generated:</p>
+	    			<p>{{results.description}}</p>
+	    		</div>
+	    {% endif %}
+	</div>
+	<div>
+		<div>
+			<input type="text" placeholder="Search" name="search" id="text">
+			<button onClick="myFunction()", type="submit">Submit</button>
+		  </form>
+		</div>
+	</div>
+	<script>
+
+		function myFunction() {
+			var text = document.getElementById('text').value;
+			console.log(text);
+			const url = 'http://127.0.0.1:5000/predict';
+			let send_data = JSON.stringify({
+				'data': text
+			});
+			let fetchData = {
+				method: 'POST',
+				// mode: 'cors',
+				body: send_data,
+				headers:  {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				  }
+			}
+			console.log(fetchData);
+			fetch(url, fetchData)
+			.then(data=> data.json())
+				.then(data=>console.log(JSON.stringify(data)))
+				.catch(error=>console.log(JSON.stringify(error)))
+	}
+	
+	
+	
+	</script>
+	
+</body>
+</html>
