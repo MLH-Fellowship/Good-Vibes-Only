@@ -8,21 +8,18 @@ warnings.filterwarnings("ignore")
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/')
-def hello():
-    return render_template('index.html')
-
-@app.route('/', methods = ['POST'])
+@app.route('/predict-image', methods = ['POST'])
 def upload_file():
-	if request.method == 'POST':
-		img = request.files['image']
-		img.save("static/"+img.filename)
-		caption = caption_generator("static/"+img.filename)
-		result_dic = {
-			'image' : "static/" + img.filename,
-			'description' : caption
-		}
-	return render_template('index.html', results = result_dic)
+    if request.method == 'POST':
+        img = request.files['image']
+        img.save("static/"+img.filename)
+        caption = caption_generator("static/"+img.filename)
+        result_dic = {
+            'image' : "static/" + img.filename,
+            'description' : caption
+        }
+        result_dic['description'] = sentiment_predict(caption)
+    return jsonify({'sentiment': result_dic['description']})
 
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
@@ -34,7 +31,7 @@ def predict():
         data = request.get_json()  # parse as JSON
         user_content = data["data"]
         result = sentiment_predict(user_content)
-        return jsonify(result),200
+        return jsonify({'sentiment': result}),200
 
 
 if __name__ == '__main__':
