@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <%- include('./components/header'); -%>
+  <link rel='stylesheet' href='/stylesheets/form.css' />
+  <body>
+    <div id="root">
+      <nav class="navbar navbar-expand-lg navbar-light" bg-white" style="width: 95%; margin: auto; z-index: 5;">
+        <a id='logo' href="/">
+          Good Vibes Only 💕
+        </a>
+      </nav>
+      <div class='position-absolute fixed-top d-flex flex-column min-vh-100 justify-content-center align-items-center' style="z-index: 0;">
+        <form id='form' class="d-flex flex-column shadow p-4 mb-5 bg-white rounded">
+          <p class="text-center font-weight-bold" style="font-size: 16px;">Hey Captain!👋</p>
+          <!-- email -->
+          <div class="form-group">
+            <label for="email">😇 your email: </label>
+            <input type="email" class="form-control form-control-sm" name="email" aria-describedby="emailHelp">
+          </div>
+          <!-- password -->
+          <div class="form-group">
+            <label for="password">😇 enter your password: </label>
+            <input type="password" class="form-control form-control-sm" name="password">
+          </div>
+          <div class="d-flex flex-column align-self-center w-100 justify-content-center align-items-center">
+            <button type="submit" class="btn btn-outline-success">🎉 Login!</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+  <%- include('./components/scripts'); -%>
+</html>

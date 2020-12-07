@@ -4,6 +4,8 @@ var User = require('../models/user');
 var Post = require('../models/post');
 const passport = require('passport');
 
+const $ = require('jquery')
+
 /* GET home page. */
 router.get("/", function (req, res, next) {
   if(req.user){
@@ -152,6 +154,18 @@ router.get('/settings',(req,res,next) => {
 
 router.get('/updatepassword',(req,res,next) => {
   res.render('updatePassword',{ title: "Good Vibes Only 💕" })
+})
+
+router.get('/admin',(req,res,next) => {
+  res.render('approvals',{ title: "Good Vibes Only 💕", posts: [{url: '', text: '', name: '', type: ''}]})
+})
+
+router.post('/approve',(req,res,next) => {
+  //do stuff here
+})
+
+router.post('/disapprove',(req,res,next) => {
+  //do stuff here
 })
 
 function isValidUser(req,res,next){
