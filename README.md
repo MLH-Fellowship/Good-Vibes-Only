@@ -13,7 +13,7 @@
   </p>
 </p>
 
-![master](https://github.com/MLH-Fellowship/Good-Vibes-Only/workflows/master/badge.svg)
+![build](https://github.com/MLH-Fellowship/Good-Vibes-Only/workflows/build/badge.svg?branch=main)
 
 <!-- TABLE OF CONTENTS -->
 
