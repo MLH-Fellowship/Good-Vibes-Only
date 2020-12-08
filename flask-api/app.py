@@ -2,11 +2,14 @@ from flask import Flask, render_template, url_for, request, redirect, jsonify
 from flask_cors import CORS
 from predict import *
 from caption import *
+import os
 import warnings
 warnings.filterwarnings("ignore")
 
 app = Flask(__name__)
 CORS(app)
+
+port = int(os.environ.get("PORT", 5000))
 
 @app.route('/predict-image', methods = ['POST'])
 def upload_file():
@@ -35,4 +38,4 @@ def predict():
 
 
 if __name__ == '__main__':
-	app.run(debug = True)
+	app.run(host='0.0.0.0',debug = True,port=port)
