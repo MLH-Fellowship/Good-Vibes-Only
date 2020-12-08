@@ -1,6 +1,6 @@
 
 
-  <h3 align="center">Good Vibes Only</span></h3>
+  <h3 align="center">💕 Good Vibes Only 💕</span></h3>
     <blockquote>Albert Schweitzer, a German physician and Nobel Peace Prize winner, had it right when he said, “Happiness is the only thing that multiplies when you share it.”</blockquote> 
   <p align="center">
   As it turns out, plenty of research backs up this idea that sharing good news contributes to greater well-being for all.
@@ -13,9 +13,11 @@
   </p>
 </p>
 
+![master](https://github.com/MLH-Fellowship/Good-Vibes-Only/workflows/master/badge.svg)
+
 <!-- TABLE OF CONTENTS -->
 
-## Table of Contents
+## 💕 Table of Contents
 
 - [About the Project](#about-the-project)
   - [Built With](#built-with)
@@ -30,7 +32,7 @@
 
 <!-- ABOUT THE PROJECT -->
 
-## About The Project
+## 💕 About The Project
 Are you tired of the constant negative news reports? The Good News Network app delivers daily positive news from around the world. People need a well-balanced media diet, so our daily dose of ‘News to Enthuse’ is like Vitamin G for the spirit.
 <!--
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
@@ -48,7 +50,7 @@ This project would never have been possible without these wonderful frameworks a
 
 <!-- GETTING STARTED -->
 
-## Development
+## 💕 Development
 
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
@@ -72,34 +74,62 @@ npm install
 git clone https://github.com/MLH-Fellowship/Good-Vibes-Only.git
 ```
 
-2. Install NPM packages
+2. Go to platform folder
+
+```sh
+cd platform
+```
+
+3. Install NPM packages
 
 ```sh
 npm install
 ```
 
-3. Create a .env file in home directory with valid credentials as follows
+4. Create a .env file in home directory with valid credentials as follows
 
 ```
 MONGODB_URI=<your_mongodb URI>
 
 ```
 
-4. Start the project
+5. Start the project
 
 ```JS
 npm start
 ```
 
+<!-- SCREENSHOTS -->
+
+
+## 💕 Screenshots
+
+#### 💕 Landing page
+
+![Landing page](https://github.com/MLH-Fellowship/Good-Vibes-Only/blob/main/screenshots/landing.gif)
+
+
+#### 💕 Anonymous Login & Feed
+
+![Anonymous Login](https://github.com/MLH-Fellowship/Good-Vibes-Only/blob/main/screenshots/anonymous.gif)
+
+#### 💕 Login, Upload & Settings
+
+![Login Page](https://github.com/MLH-Fellowship/Good-Vibes-Only/blob/main/screenshots/login.gif)
+
+#### 💕 Register
+
+![Register page](https://github.com/MLH-Fellowship/Good-Vibes-Only/blob/main/screenshots/register.gif)
+
 <!-- ROADMAP -->
 
-## Roadmap
+## 💕 Roadmap
 
 See the [open issues](https://github.com/MLH-Fellowship/Good-Vibes-Only/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 
-## Contributing
+## 💕 Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -111,13 +141,13 @@ Contributions are what make the open source community such an amazing place to b
 
 <!-- LICENSE -->
 
-## License
+## 💕 License
 
 Distributed under the MIT License. See `LICENSE.md` for more information.
 
 <!-- CONTACT -->
 
-## Contact
+## 💕 Contact
 
 - Vrushti Mody <[@vrushti-mody](https://github.com/vrushti-mody),  vrushtimody6@gmail.com>
 - Saurabh Kumar Suryan <[@sksuryan](https://github.com/sksuryan)>
